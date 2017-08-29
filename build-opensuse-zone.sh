@@ -54,8 +54,13 @@ fi
 
 checkrootuser
 
-zypper ar -f http://download.opensuse.org/repositories/Virtualization/openSUSE_Leap_42.3 Virtualization
-checkhard added: Virtualization repo
+if [ -f /etc/zypp/repos.d/Virtualization.repo ]
+then
+   : # dummy
+else
+   zypper ar -f http://download.opensuse.org/repositories/Virtualization/openSUSE_Leap_42.3 Virtualization
+   checkhard added: Virtualization repo
+fi
 
 zypper in -f python3-kiwi
 checkhard installed: python3-kiwi
