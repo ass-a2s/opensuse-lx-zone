@@ -54,16 +54,16 @@ fi
 
 checkrootuser
 
-zypper ar -f http://download.opensuse.org/repositories/Virtualization/openSUSE_Leap42.3 Virtualization
+zypper ar -f http://download.opensuse.org/repositories/Virtualization/openSUSE_Leap_42.3 Virtualization
 checkhard added: Virtualization repo
 
-zypper in -fn python3-kiwi
+zypper in -f python3-kiwi
 checkhard installed: python3-kiwi
 
-zypper in -fn umoci
+zypper in -f umoci
 checkhard installed: umoci
 
-zypper in -fn skopeo
+zypper in -f skopeo
 checkhard installed: skopeo
 
 sudo kiwi-ng system prepare --description . --root /tmp/lx-zone
