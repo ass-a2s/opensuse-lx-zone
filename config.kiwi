@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<image schemaversion="6.1" name="openSUSE-42.2-lx-branded-zone">
+<image schemaversion="6.1" name="openSUSE-42.3-lx-branded-zone">
   <description type="system">
     <author>Flavio Castelli</author>
     <contact>fcastelli@suse.com</contact>
-    <specification>openSUSE 42.2 lx-branded zone</specification>
+    <specification>openSUSE 42.3 lx-branded zone</specification>
   </description>
   <preferences>
-    <type image="docker" container="os422">
+    <type image="docker" container="os423">
       <machine>
         <vmdisk/>
         <vmnic interface="eth0" mode="veth"/>
@@ -26,10 +26,10 @@
     <user home="/root" name="root"/>
   </users>
   <repository type="rpm-md" imageinclude="true" alias="OSS Updates">
-      <source path="obs://openSUSE:Leap:42.2:Update/standard"/>
+      <source path="obs://openSUSE:Leap:42.3:Update/standard"/>
   </repository>
   <repository type="rpm-md" imageinclude="true" alias="OSS">
-      <source path="obs://openSUSE:Leap:42.2/standard"/>
+      <source path="obs://openSUSE:Leap:42.3/standard"/>
   </repository>
   <packages type="image">
     <package name="ca-certificates"/>

@@ -2,7 +2,7 @@
 name=NON-OSS
 enabled=1
 autorefresh=1
-baseurl=http://download.opensuse.org/distribution/leap/42.2/repo/non-oss/
+baseurl=http://download.opensuse.org/distribution/leap/42.3/repo/non-oss/
 path=/
 type=yast2
 keeppackages=0

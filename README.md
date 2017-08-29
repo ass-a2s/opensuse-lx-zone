@@ -1,4 +1,14 @@
-Experimental lx branded zone for openSUSE Leap 42.2
+
+ASS - initial patches
+=====================
+* changed: LEAP 42.2 to 42.3
+* add: root/root/guesttools/src/lib/smartdc/suse
+* add: build-opensuse-zone.sh
+
+General
+=======
+
+Experimental lx branded zone for openSUSE Leap 42.3
 
 Current status: **broken**
 
@@ -7,7 +17,7 @@ Current status: **broken**
 Install kiwi3 from the Virtualization:Appliances repository:
 
 ```
-sudo zypper ar -f obs://Virtualization:Appliances/openSUSE_Leap_42.2 Virtualization:Appliances"
+sudo zypper ar -f obs://Virtualization:Appliances/openSUSE_Leap_42.3 Virtualization:Appliances"
 zypper in -f python3-kiwi
 ```
 
@@ -45,7 +55,7 @@ Checkout [this](https://github.com/joyent/debian-lx-brand-image-builder) reposit
 and then execute:
 
 ```
-./create-lx-image -t /zones/opensuse-zone.tar.gz -k 3.13.0 -i lx-opensuse-leap-42-2 -d "openSUSE Leap 42.2 64-bit lx-brand image." -u http://opensuse.org -m 20150316T201553Z
+./create-lx-image -t /zones/opensuse-zone.tar.gz -k 3.13.0 -i lx-opensuse-leap-42.3 -d "openSUSE Leap 42.3 64-bit lx-brand image." -u http://opensuse.org -m 20150316T201553Z
 ```
 
 This will produce the `.zfs` image and its manifest.
@@ -53,7 +63,7 @@ This will produce the `.zfs` image and its manifest.
 The can be imported via:
 
 ```
-imgadm install -m lx-opensuse-leap-42-2-20170406.json -f lx-opensuse-leap-42-2-20170406.zfs.gz
+imgadm install -m lx-opensuse-leap-42.3-20170406.json -f lx-opensuse-leap-42.3-20170406.zfs.gz
 ```
 
 The names of the image and of the manifest are going to change according to your
@@ -88,9 +98,9 @@ vmadm create -f opensuse.json
 The image won't start because of the following error:
 
 ```
-Command failed: zone '8742b92b-a750-6e0f-ca05-ab4272263862': ERROR: Unsupported distribution!
-zone '8742b92b-a750-6e0f-ca05-ab4272263862': exec /usr/lib/brand/lx/lx_boot 8742b92b-a750-6e0f-ca05-ab4272263862 /zones/8742b92b-a750-6e0f-ca05-ab4272263862 failed
-zoneadm: zone '8742b92b-a750-6e0f-ca05-ab4272263862': call to zoneadmd failed
+Command failed: zone '8742b92b-a750-6e0f-ca05-ab42.3263862': ERROR: Unsupported distribution!
+zone '8742b92b-a750-6e0f-ca05-ab42.3263862': exec /usr/lib/brand/lx/lx_boot 8742b92b-a750-6e0f-ca05-ab42.3263862 /zones/8742b92b-a750-6e0f-ca05-ab42.3263862 failed
+zoneadm: zone '8742b92b-a750-6e0f-ca05-ab42.3263862': call to zoneadmd failed
 ```
 
 This happens because the `/usr/lib/brand/lx/lx_boot` doesn't know about openSUSE:
@@ -127,3 +137,4 @@ I've tried to trick the check into thinking this is a Red Hat system, but the
 
 This doesn't surprise me, I looked into the `lx_boot_zone_redhat` file and I doubt
 these instructions could work on openSUSE... :(
+

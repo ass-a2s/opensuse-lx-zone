@@ -2,7 +2,7 @@
 name=OSS
 enabled=1
 autorefresh=1
-baseurl=http://download.opensuse.org/distribution/leap/42.2/repo/oss/
+baseurl=http://download.opensuse.org/distribution/leap/42.3/repo/oss/
 path=/
 type=yast2
 keeppackages=0
