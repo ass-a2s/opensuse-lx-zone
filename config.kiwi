@@ -38,6 +38,14 @@
     <package name="iputils"/>
     <package name="openSUSE-build-key"/>
     <package name="openSUSE-release"/>
+    <package name="autoyast2-installation"/>
+    <package name="patterns-openSUSE-yast2_basis"/>
+    <package name="yast2"/>
+    <package name="yast2-add-on"/>
+    <package name="yast2-auth-client"/>
+    <package name="yast2-bootloader"/>
+    <package name="yast2-branding-openSUSE"/>
+    <package name="yast2-core"/>
   </packages>
   <packages type="bootstrap">
     <package name="acl"/>
