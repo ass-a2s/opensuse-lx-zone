@@ -38,6 +38,8 @@
     <package name="iputils"/>
     <package name="openSUSE-build-key"/>
     <package name="openSUSE-release"/>
+    <package name="less"/>
+    <package name="iproute2"/>
     <package name="autoyast2-installation"/>
     <package name="patterns-openSUSE-yast2_basis"/>
     <package name="yast2"/>
