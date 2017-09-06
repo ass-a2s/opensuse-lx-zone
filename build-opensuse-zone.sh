@@ -62,14 +62,29 @@ else
    checkhard added: Virtualization repo
 fi
 
-zypper in -f python3-kiwi
-checkhard installed: python3-kiwi
+if [ -f /usr/bin/kiwi ]
+then
+   : # dummy
+else
+   zypper in -f python3-kiwi
+   checkhard installed: python3-kiwi
+fi
 
-zypper in -f umoci
-checkhard installed: umoci
+if [ -f /usr/bin/umoci ]
+then
+   : # dummy
+else
+   zypper in -f umoci
+   checkhard installed: umoci
+fi
 
-zypper in -f skopeo
-checkhard installed: skopeo
+if [ -f /usr/bin/skopeo ]
+then
+   : # dummy
+else
+   zypper in -f skopeo
+   checkhard installed: skopeo
+fi
 
 sudo kiwi-ng system prepare --description . --root /tmp/lx-zone
 checkhard built: openSUSE lx zone from /tmp/lx-zone
