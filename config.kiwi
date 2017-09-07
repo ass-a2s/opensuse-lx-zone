@@ -40,6 +40,7 @@
     <package name="openSUSE-release"/>
     <package name="less"/>
     <package name="curl"/>
+    <package name="net-tools"/>
     <package name="iproute2"/>
     <package name="autoyast2-installation"/>
     <package name="patterns-openSUSE-yast2_basis"/>
