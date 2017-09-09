@@ -35,14 +35,15 @@
     <package name="ca-certificates"/>
     <package name="ca-certificates-mozilla"/>
     <package name="coreutils"/>
-    <package name="iputils"/>
     <package name="openSUSE-build-key"/>
     <package name="openSUSE-release"/>
     <package name="vim"/>
     <package name="less"/>
-    <package name="curl"/>
+    <package name="iputils"/>
     <package name="net-tools"/>
     <package name="iproute2"/>
+    <package name="nscd"/>
+    <package name="curl"/>
     <package name="autoyast2-installation"/>
     <package name="patterns-openSUSE-yast2_basis"/>
     <package name="yast2"/>
