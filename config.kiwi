@@ -38,6 +38,7 @@
     <package name="iputils"/>
     <package name="openSUSE-build-key"/>
     <package name="openSUSE-release"/>
+    <package name="vim"/>
     <package name="less"/>
     <package name="curl"/>
     <package name="net-tools"/>
