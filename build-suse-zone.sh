@@ -60,8 +60,16 @@ if [ -f /etc/zypp/repos.d/Virtualization.repo ]
 then
    : # dummy
 else
-   zypper ar -f http://download.opensuse.org/repositories/Virtualization/openSUSE_Leap_42.3 Virtualization
-   checkhard added: Virtualization repo
+   if [ "$SUSE" = "opensuse" ]
+   then
+      zypper ar -f http://download.opensuse.org/repositories/Virtualization/openSUSE_Leap_42.3 Virtualization
+      checkhard added: Virtualization - openSUSE 42.3 Repository
+   fi
+   if [ "$SUSE" = "sles" ]
+   then
+      zypper ar -f http://download.opensuse.org/repositories/Virtualization/SLE_12 Virtualization
+      checkhard added: Virtualization - SLES 12 Repository
+   fi
 fi
 
 if [ -f /usr/bin/kiwi ]
@@ -84,23 +92,35 @@ if [ -f /usr/bin/umoci ]
 then
    : # dummy
 else
-   zypper in -f umoci
-   checkhard installed: umoci
+   if [ "$SUSE" = "opensuse" ]
+   then
+      zypper in -f umoci
+      checkhard installed: umoci
+   fi
 fi
 
 if [ -f /usr/bin/skopeo ]
 then
    : # dummy
 else
-   zypper in -f skopeo
-   checkhard installed: skopeo
+   if [ "$SUSE" = "opensuse" ]
+   then
+      zypper in -f skopeo
+      checkhard installed: skopeo
+   fi
 fi
 
-sudo kiwi-ng system prepare --description . --root /tmp/lx-zone
-checkhard built: openSUSE lx zone from /tmp/lx-zone
+#// build: opensuse
+if [ "$SUSE" = "opensuse" ]
+then
+   sudo kiwi-ng system prepare --description . --root /tmp/lx-zone
+   checkhard built: openSUSE lx zone from /tmp/lx-zone
 
-sudo tar czf opensuse-zone.tar.gz /tmp/lx-zone
-checkhard packaged: openSUSE lx zone from /tmp/lx-zone
+   sudo tar czf opensuse-zone.tar.gz /tmp/lx-zone
+   checkhard packaged: openSUSE lx zone from /tmp/lx-zone
+fi
+
+#// build: suse sles
 
 ### ### ### // ASS ### ### ###
 exit 0
