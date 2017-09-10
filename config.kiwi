@@ -35,15 +35,29 @@
     <package name="ca-certificates"/>
     <package name="ca-certificates-mozilla"/>
     <package name="coreutils"/>
+    <package name="diffutils"/>
+    <package name="pwdutils"/>
     <package name="openSUSE-build-key"/>
     <package name="openSUSE-release"/>
+    <package name="perl-base"/>
+    <package name="insserv-compat"/>
+    <package name="bash"/>
     <package name="vim"/>
     <package name="less"/>
+    <package name="fillup"/>
+    <package name="permissions"/>
+    <package name="pam"/>
+    <package name="rpm"/>
+    <package name="sed"/>
+    <package name="grep"/>
+    <package name="tar"/>
     <package name="iputils"/>
+    <package name="netcfg"/>
     <package name="net-tools"/>
     <package name="iproute2"/>
     <package name="nscd"/>
     <package name="curl"/>
+    <package name="openssh"/>
     <package name="autoyast2-installation"/>
     <package name="patterns-openSUSE-yast2_basis"/>
     <package name="yast2"/>
@@ -86,6 +100,7 @@
     <package name="yast2-vpn"/>
     <package name="yast2-xml"/>
     <package name="yast2-ycp-ui-bindings"/>
+    <package name="hwinfo"/>
   </packages>
   <packages type="bootstrap">
     <package name="acl"/>
