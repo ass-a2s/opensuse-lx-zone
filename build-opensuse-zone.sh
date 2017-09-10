@@ -30,6 +30,8 @@
 
 ### ### ### ASS // ### ### ###
 
+SUSE=$(grep -s "^ID=" /etc/os-release | sed 's/ID=//g' | sed 's/"//g')
+
 #// FUNCTION: run script as root (Version 1.0)
 checkrootuser() {
 if [ "$(id -u)" != "0" ]; then
@@ -66,8 +68,16 @@ if [ -f /usr/bin/kiwi ]
 then
    : # dummy
 else
-   zypper in -f python3-kiwi
-   checkhard installed: python3-kiwi
+   if [ "$SUSE" = "opensuse" ]
+   then
+      zypper in -f python3-kiwi
+      checkhard installed: python3-kiwi
+   fi
+   if [ "$SUSE" = "sles" ]
+   then
+      zypper in -f python2-kiwi
+      checkhard installed: python2-kiwi
+   fi
 fi
 
 if [ -f /usr/bin/umoci ]
