@@ -32,6 +32,8 @@
 
 SUSE=$(grep -s "^ID=" /etc/os-release | sed 's/ID=//g' | sed 's/"//g')
 
+ADIR="$PWD"
+
 #// FUNCTION: run script as root (Version 1.0)
 check_root_user() {
 if [ "$(id -u)" != "0" ]; then
@@ -110,6 +112,7 @@ check_root_user
 prepare_opensuse
 prepare_sles
 
+git clone https://github.com/ass-a2s/sdc-vmtools-lx-brand "$ADIR"/root/root/guesttools
 build_opensuse
 
 ### ### ### // ASS ### ### ###

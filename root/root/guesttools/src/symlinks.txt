@@ -1,4 +1,0 @@
-/usr/sbin/mdata-get
-/usr/sbin/mdata-put
-/usr/sbin/mdata-delete
-/usr/sbin/mdata-list
