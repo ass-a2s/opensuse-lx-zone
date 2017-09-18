@@ -1,16 +1,23 @@
 
 ASS - initial patches
 =====================
+
 * changed: LEAP 42.2 to 42.3
 * add: root/root/guesttools/src/lib/smartdc/suse
-* add: build-opensuse-zone.sh
+* add: build-suse-zone.sh
 
 General
 =======
 
 Experimental lx branded zone for openSUSE Leap 42.3
 
-Current status: **broken**
+Current status: **it works**
+
+# SmartOS Requirements
+
+* SmartOS: > 20170913T233706Z
+* https://us-east.manta.joyent.com/Joyent_Dev/public/SmartOS/smartos.html#20170913T233706Z
+* https://smartos.org/bugview/OS-6326
 
 # Requirements
 
@@ -55,7 +62,7 @@ Checkout [this](https://github.com/joyent/debian-lx-brand-image-builder) reposit
 and then execute:
 
 ```
-./create-lx-image -t /zones/opensuse-zone.tar.gz -k 3.13.0 -i lx-opensuse-leap-42.3 -d "openSUSE Leap 42.3 64-bit lx-brand image." -u http://opensuse.org -m 20150316T201553Z
+./create-lx-image -t /zones/opensuse-zone.tar.gz -k 4.4.0 -i lx-opensuse-leap-42.3 -d "openSUSE Leap 42.3 64-bit lx-brand image." -u https://opensuse.org -m 20170913T233706Z
 ```
 
 This will produce the `.zfs` image and its manifest.
@@ -63,7 +70,7 @@ This will produce the `.zfs` image and its manifest.
 The can be imported via:
 
 ```
-imgadm install -m lx-opensuse-leap-42.3-20170406.json -f lx-opensuse-leap-42.3-20170406.zfs.gz
+imgadm install -m lx-opensuse-leap-42.3-20170919.json -f lx-opensuse-leap-42.3-20170919.zfs.gz
 ```
 
 The names of the image and of the manifest are going to change according to your
@@ -76,9 +83,9 @@ create a `.json` file like this one:
 
 ```json
 {
-  "alias": "lxtest",
+  "alias": "lx-opensuse",
   "brand": "lx",
-  "kernel_version": "4.3.0",
+  "kernel_version": "4.4.0",
   "max_physical_memory": 2048,
   "quota": 10,
   "image_uuid": "82e018c4-1ada-11e7-9b00-17458a170ca3"
@@ -93,48 +100,5 @@ Then start the zone by doing:
 vmadm create -f opensuse.json
 ```
 
-# The issue
-
-The image won't start because of the following error:
-
-```
-Command failed: zone '8742b92b-a750-6e0f-ca05-ab42.3263862': ERROR: Unsupported distribution!
-zone '8742b92b-a750-6e0f-ca05-ab42.3263862': exec /usr/lib/brand/lx/lx_boot 8742b92b-a750-6e0f-ca05-ab42.3263862 /zones/8742b92b-a750-6e0f-ca05-ab42.3263862 failed
-zoneadm: zone '8742b92b-a750-6e0f-ca05-ab42.3263862': call to zoneadmd failed
-```
-
-This happens because the `/usr/lib/brand/lx/lx_boot` doesn't know about openSUSE:
-
-```bash
-#
-# Determine the distro.
-#
-distro=""
-if [[ $(zonecfg -z $ZONENAME info attr name=docker) =~ "value: true" ]]; then
-        distro="docker"
-elif [[ -f $ZONEROOT/etc/redhat-release ]]; then
-        distro="redhat"
-elif [[ -f $ZONEROOT/etc/lsb-release ]]; then
-        if egrep -s Ubuntu $ZONEROOT/etc/lsb-release; then
-                distro="ubuntu"
-        elif [[ -f $ZONEROOT/etc/debian_version ]]; then
-                distro="debian"
-        fi
-elif [[ -f $ZONEROOT/etc/debian_version ]]; then
-        distro="debian"
-elif [[ -f $ZONEROOT/etc/alpine-release ]]; then
-        distro="busybox"
-fi
-
-[[ -z $distro ]] && fatal "Unsupported distribution!"
-```
-
-Unfortunately this file is located on a read-only file system, hence it cannot
-be modified.
-
-I've tried to trick the check into thinking this is a Red Hat system, but the
-`vmadm` got stuck and timed out after some time.
-
-This doesn't surprise me, I looked into the `lx_boot_zone_redhat` file and I doubt
-these instructions could work on openSUSE... :(
+# Issues:
 

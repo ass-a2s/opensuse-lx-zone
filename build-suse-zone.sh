@@ -33,7 +33,7 @@
 SUSE=$(grep -s "^ID=" /etc/os-release | sed 's/ID=//g' | sed 's/"//g')
 
 #// FUNCTION: run script as root (Version 1.0)
-checkrootuser() {
+check_root_user() {
 if [ "$(id -u)" != "0" ]; then
    echo "[ERROR] This script must be run as root" 1>&2
    exit 1
@@ -41,7 +41,7 @@ fi
 }
 
 #// FUNCTION: check state (Version 1.0)
-checkhard() {
+check_hard() {
 if [ $? -eq 0 ]
 then
    echo "[$(printf "\033[1;32m  OK  \033[0m\n")] '"$@"'"
@@ -52,75 +52,65 @@ else
 fi
 }
 
-#// RUN
-
-checkrootuser
-
-if [ -f /etc/zypp/repos.d/Virtualization.repo ]
+#// FUNCTION: prepare_opensuse (Version 1.0)
+prepare_opensuse() {
+if [ "$SUSE" = "opensuse" ]
 then
-   : # dummy
-else
-   if [ "$SUSE" = "opensuse" ]
+   if [ ! -f /etc/zypp/repos.d/Virtualization.repo ]
    then
       zypper ar -f http://download.opensuse.org/repositories/Virtualization/openSUSE_Leap_42.3 Virtualization
-      checkhard added: Virtualization - openSUSE 42.3 Repository
+      check_hard added: Virtualization - openSUSE 42.3 Repository
    fi
-   if [ "$SUSE" = "sles" ]
-   then
-      zypper ar -f http://download.opensuse.org/repositories/Virtualization/SLE_12 Virtualization
-      checkhard added: Virtualization - SLES 12 Repository
-   fi
-fi
-
-if [ -f /usr/bin/kiwi ]
-then
-   : # dummy
-else
-   if [ "$SUSE" = "opensuse" ]
+   if [ ! -f /usr/bin/kiwi ]
    then
       zypper in -f python3-kiwi
-      checkhard installed: python3-kiwi
+      check_hard installed: python3-kiwi
    fi
-   if [ "$SUSE" = "sles" ]
-   then
-      zypper in -f python2-kiwi
-      checkhard installed: python2-kiwi
-   fi
-fi
-
-if [ -f /usr/bin/umoci ]
-then
-   : # dummy
-else
-   if [ "$SUSE" = "opensuse" ]
+   if [ ! -f /usr/bin/umoci ]
    then
       zypper in -f umoci
-      checkhard installed: umoci
+      check_hard installed: umoci
    fi
-fi
-
-if [ -f /usr/bin/skopeo ]
-then
-   : # dummy
-else
-   if [ "$SUSE" = "opensuse" ]
+   if [ ! -f /usr/bin/skopeo ]
    then
       zypper in -f skopeo
-      checkhard installed: skopeo
+      check_hard installed: skopeo
    fi
 fi
+}
 
-#// build: opensuse
+#// FUNCTION: build_opensuse (Version 1.0)
+build_opensuse() {
 if [ "$SUSE" = "opensuse" ]
 then
    sudo kiwi-ng system prepare --description . --root /tmp/lx-zone
-   checkhard built: openSUSE lx zone from /tmp/lx-zone
+   check_hard built: openSUSE lx zone from /tmp/lx-zone
 
    sudo tar czf opensuse-zone.tar.gz /tmp/lx-zone
-   checkhard packaged: openSUSE lx zone from /tmp/lx-zone
+   check_hard packaged: openSUSE lx zone from /tmp/lx-zone
 fi
+}
 
-#// build: suse sles
+#// FUNCTION: prepare_sles (Version 1.0)
+prepare_sles() {
+if [ "$SUSE" = "sles" ]
+then
+   if [ ! -f /etc/zypp/repos.d/Virtualization.repo ]
+   then
+      zypper ar -f http://download.opensuse.org/repositories/Virtualization/SLE_12 Virtualization
+      check_hard added: Virtualization - SLES 12 Repository
+   fi
+fi
+}
+
+#// RUN
+
+check_root_user
+
+prepare_opensuse
+prepare_sles
+
+build_opensuse
 
 ### ### ### // ASS ### ### ###
 exit 0
