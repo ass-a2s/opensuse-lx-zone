@@ -105,6 +105,16 @@ then
 fi
 }
 
+#// FUNCTION: check_git (Version 1.0)
+check_git() {
+if [ ! -d "$ADIR"/root/root/guesttools ]
+then
+   echo "[$(printf "\033[1;31mFAILED\033[0m\n")] can not find ../root/root/guesttools"
+   sleep 1
+   exit 1
+fi
+}
+
 #// RUN
 
 check_root_user
@@ -113,6 +123,9 @@ prepare_opensuse
 prepare_sles
 
 git clone https://github.com/ass-a2s/sdc-vmtools-lx-brand "$ADIR"/root/root/guesttools
+check_hard git: guesttools
+check_git
+
 build_opensuse
 
 ### ### ### // ASS ### ### ###
