@@ -50,5 +50,5 @@ The names of the image and of the manifest are going to change according to your
 ASS - pre-built image history
 =============================
 
-* http://dsapid.root1.ass.de/ui/#!/configure/17215c80-9d00-11e7-808d-2f5fa82c4fa1
+* build-20170919: http://dsapid.root1.ass.de/ui/#!/configure/17215c80-9d00-11e7-808d-2f5fa82c4fa1
 
