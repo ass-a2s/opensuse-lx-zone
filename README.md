@@ -47,3 +47,8 @@ imgadm install -m ass-opensuse-leap-42.3-20170919.json -f ass-opensuse-leap-42.3
 
 The names of the image and of the manifest are going to change according to your local time.
 
+ASS - pre-built image history
+=============================
+
+* http://dsapid.root1.ass.de/ui/#!/configure/17215c80-9d00-11e7-808d-2f5fa82c4fa1
+
