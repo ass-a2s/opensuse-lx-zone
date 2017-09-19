@@ -107,8 +107,10 @@ fi
 
 #// FUNCTION: check_git (Version 1.0)
 check_git() {
-if [ ! -d "$ADIR"/root/root/guesttools ]
+if [ -d "$ADIR"/root/root/guesttools ]
 then
+   : # dummy
+else
    echo "[$(printf "\033[1;31mFAILED\033[0m\n")] can not find ../root/root/guesttools"
    sleep 1
    exit 1
