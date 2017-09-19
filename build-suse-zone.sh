@@ -125,7 +125,6 @@ prepare_opensuse
 prepare_sles
 
 git clone https://github.com/ass-a2s/sdc-vmtools-lx-brand "$ADIR"/root/root/guesttools
-check_hard git: guesttools
 check_git
 
 build_opensuse
