@@ -107,7 +107,7 @@ fi
 
 #// FUNCTION: check_git (Version 1.0)
 check_git() {
-if [ -d "$ADIR"/root/root/guesttools ]
+if [ "$(ls -A $ADIR/root/root/guesttools)" ]
 then
    : # dummy
 else
