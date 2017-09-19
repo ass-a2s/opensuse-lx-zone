@@ -110,7 +110,7 @@ clone_git() {
 git clone https://github.com/ass-a2s/sdc-vmtools-lx-brand "$ADIR"/root/root/guesttools
 if [ $? -eq 128 ]
 then
-   printf "\033[1;31mWARNING: skips the git repository clone because the directory exists\033[0m\n"
+   printf "\033[1;33mWARNING: skips the git repository clone because the directory exists\033[0m\n"
 fi
 }
 
