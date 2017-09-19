@@ -105,6 +105,15 @@ then
 fi
 }
 
+#// FUNCTION: clone_git (Version 1.0)
+clone_git() {
+git clone https://github.com/ass-a2s/sdc-vmtools-lx-brand "$ADIR"/root/root/guesttools
+if [ $? -eq 128 ]
+then
+   printf "\033[1;31mWARNING: skips the git repository clone because the directory exists\033[0m\n"
+fi
+}
+
 #// FUNCTION: check_git (Version 1.0)
 check_git() {
 if [ "$(ls -A $ADIR/root/root/guesttools)" ]
@@ -124,7 +133,7 @@ check_root_user
 prepare_opensuse
 prepare_sles
 
-git clone https://github.com/ass-a2s/sdc-vmtools-lx-brand "$ADIR"/root/root/guesttools
+clone_git
 check_git
 
 build_opensuse
